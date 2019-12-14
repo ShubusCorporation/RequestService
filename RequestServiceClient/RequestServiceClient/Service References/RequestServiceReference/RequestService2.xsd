@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RequestService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RequestService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8000/RequestService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:simpleType name="RequestType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="REQUEST_SELDON" />
+      <xs:enumeration value="REQUEST_JUSTICE" />
+      <xs:enumeration value="REQUEST_LEARNING" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RequestType" nillable="true" type="tns:RequestType" />
+  <xs:complexType name="UserRequestCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_JusticeRequestsParams" nillable="true" type="tns:ArrayOfJusticeRequestParams" />
+      <xs:element minOccurs="0" name="_LearningRequestsParams" nillable="true" type="tns:ArrayOfLearningRequestParams" />
+      <xs:element minOccurs="0" name="_SeldonRequestsParams" nillable="true" type="tns:ArrayOfSeldonRequestParams" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserRequestCollection" nillable="true" type="tns:UserRequestCollection" />
+  <xs:complexType name="ArrayOfJusticeRequestParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JusticeRequestParams" nillable="true" type="tns:JusticeRequestParams" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJusticeRequestParams" nillable="true" type="tns:ArrayOfJusticeRequestParams" />
+  <xs:complexType name="JusticeRequestParams">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRequestParams">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="courtAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="debtorName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="loyerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="price" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="JusticeRequestParams" nillable="true" type="tns:JusticeRequestParams" />
+  <xs:complexType name="BaseRequestParams">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="BaseRequestParams" nillable="true" type="tns:BaseRequestParams" />
+  <xs:complexType name="LearningRequestParams">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRequestParams">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="course" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="lector" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="price" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LearningRequestParams" nillable="true" type="tns:LearningRequestParams" />
+  <xs:complexType name="SeldonRequestParams">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRequestParams">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="garante" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="price" type="xs:int" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="seldonVersion" nillable="true" type="q1:Version" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SeldonRequestParams" nillable="true" type="tns:SeldonRequestParams" />
+  <xs:complexType name="ArrayOfLearningRequestParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LearningRequestParams" nillable="true" type="tns:LearningRequestParams" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLearningRequestParams" nillable="true" type="tns:ArrayOfLearningRequestParams" />
+  <xs:complexType name="ArrayOfSeldonRequestParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SeldonRequestParams" nillable="true" type="tns:SeldonRequestParams" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSeldonRequestParams" nillable="true" type="tns:ArrayOfSeldonRequestParams" />
+</xs:schema>
